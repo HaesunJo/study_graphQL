@@ -1,0 +1,21 @@
+{
+  "name": "lab01_graphql",
+  "version": "1.0.0",
+  "description": "- 🤔 API? Application Programming Interface \r     - Everything has interface such as TV remote controller, could be a menu at the restaurant!\r     You can interact with those interfaces.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.7.0",
+    "graphql": "^16.5.0",
+    "touch": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "type":"module"
+}
