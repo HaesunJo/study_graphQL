@@ -26,9 +26,9 @@
 
 | REST                                                          | GQL       |
 | ------------------------------------------------------------- | --------- |
-|REST loads a lot of data that I didn't want to get             | I can ask data exactly what I need no over-fetching|
-but I have to get everything                                   
-(litterally too much information, takes time to load -> slow) 
+|REST loads a lot of data that I didn't want to get but I have to get everything (litterally too much information, takes time to load -> slow) | I can ask data exactly what I need no over-fetching|
+                                   
+
 
 
 
@@ -38,9 +38,9 @@ but I have to get everything
 
 | REST                                                          | GQL       |
 | ------------------------------------------------------------- | --------- |
-| when I use REST API to get a specific data | under-fetching is fetch less then what I need |
-| such as city I might send two or three resquets | (take less time to load -> fast). 'Get many resources in a single request' |
-| to get the data I need.| |
+| when I use REST API to get a specific data such as city I might send two or three resquets to get the data I need | under-fetching is fetch less then what I need (take less time to load -> fast). 'Get many resources in a single request' |
+
+
 
 	#### get anything more or anything less
 
