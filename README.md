@@ -45,7 +45,7 @@
 #### get anything more or anything less
 
 ```json
-# send request like this :
+/* send request like this :
 {
 	allFilms {
 		totalCount
@@ -54,8 +54,9 @@
 		}
 	}
 }
+*/
 
-# then it will response :
+/* then it will response : */
 {
 "data": {
 		"allFilms": {
@@ -84,9 +85,9 @@
 	}
 }
 
-# more information?
+/* more information?
 
-# request:
+ request:
 {
 	allFilms {
 		totalCount
@@ -104,8 +105,8 @@
 		}
 	}
 }
-
-# response
+*/
+/* response */
 {
 "data": {
 	"allFilms": {
