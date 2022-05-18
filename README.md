@@ -42,7 +42,7 @@
 
 
 
-	#### get anything more or anything less
+#### get anything more or anything less
 
 ```json
 # send request like this :
