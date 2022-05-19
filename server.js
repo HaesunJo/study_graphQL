@@ -14,11 +14,24 @@ let tweets = [
 	}
 ]
 
+let users = [
+	{
+		id: "1",
+		firstName: "Haillie",
+		lastName: "Jo"
+	},
+	{
+		id: "2",
+		firstName: "Haesun",
+		lastName: "Jo"
+	},
+]
+
 const typeDefs = gql`
 
 	type User {
 		id: ID!
-		username: String!
+		fullname: String!
 		firstName: String!
 		lastName: String!
 	}
@@ -30,6 +43,7 @@ const typeDefs = gql`
 	}
 
 	type Query {
+		allUsers: [User!]!
 		allTweets: [Tweet!]!
 		singleTweet(id: ID!): Tweet
 		ping: String!
@@ -49,6 +63,10 @@ const resolvers = {
 		singleTweet(root, {id}){ // if it has argument in gql, put it in the second place. first one is always for root
 			return tweets.find((singleTweet) => singleTweet.id === id);
 		},
+		allUsers() {
+			console.log("all users called")
+			return users;
+		}
 	},
 	// add or delete tweet
 	Mutation: {
@@ -67,6 +85,13 @@ const resolvers = {
 			return true;
 		}
 	},
+	User: {
+		fullname(root) { // this fullname is not on database but it works.
+			console.log(root);
+			console.log("fullname called") // graphQL knows there's no fullname in DB so tried resolver for the type User
+			return "hello fullname"; // for the field name fullname
+		} // DB has 2 data, so this will be called twice to find fullname in data
+	}
 }
 
 const server = new ApolloServer({typeDefs, resolvers})
