@@ -1,7 +1,7 @@
 import { ApolloServer, gql } from "apollo-server";
 
-// 03 fake DB
-const tweets = [
+// mock DB in memory
+let tweets = [
 	{ 
 		id: "1",
 		text: "hello",
@@ -14,27 +14,6 @@ const tweets = [
 	}
 ]
 
-
-// 02. graphQL's schema definition language (SDL)
-// this will show this error message :
-// return new _GraphQLError.GraphQLError(`Syntax Error: ${description}`, {
-// GraphQLError: Syntax Error: Unexpected <EOF>.
-// ---
-// example: 
-// const typeDefs = gql`
-// type Book { <- define root
-// id: ID
-// title: String
-// author: String
-// }
-// type Query { // query will be returned, works like GET method
-// books: [Book] -> list
-// book(id: ID): Book <- query with an argument
-// }
-// post, put, delete.. all thoes actions have to be in type Mutation{}
-// requirement in gql is add ! mark => singleTweet(id: ID!): Tweet! -> it must have an id and must return a tweet
-// without !mark could be nullable value
-// `;
 const typeDefs = gql`
 
 	type User {
@@ -68,25 +47,30 @@ const resolvers = {
 			return tweets;
 		},
 		singleTweet(root, {id}){ // if it has argument in gql, put it in the second place. first one is always for root
-			// console.log(args);
 			return tweets.find((singleTweet) => singleTweet.id === id);
+		},
+	},
+	// add or delete tweet
+	Mutation: {
+		postTweet(__, { text, userId}) { // -> add new
+			const newTweet ={
+				id: tweets.length + 1,
+				text,
+			};
+			tweets.push(newTweet);
+			return newTweet;
+		},
+		deleteTweet(__, {id}) { // delete tweet
+			const tweet = tweets.find((tweet) => tweet.id === id);
+			if (!tweet) return false;
+			tweets = tweets.filter((tweet) => tweet.id !== id);
+			return true;
 		}
-		// singleTweet() {
-		// 	console.log("resolvers are called");
-		// 	return null;
-		// },
-		// ping() {
-		// 	return "pong";
-		// }
-	}
+	},
 }
 
 const server = new ApolloServer({typeDefs, resolvers})
 
-
-// 01. without typeDefs, this will show an error that 
-// Error: Apollo Server requires either an existing schema, modules or typeDefs
-// so it needs to be told what is the shape of the data so it can get a query
 server.listen().then(({url}) => {
 	console.log(`running on ${url}`);
 });
