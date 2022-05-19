@@ -86,11 +86,10 @@ const resolvers = {
 		}
 	},
 	User: {
-		fullname(root) { // this fullname is not on database but it works.
-			console.log(root);
-			console.log("fullname called") // graphQL knows there's no fullname in DB so tried resolver for the type User
-			return "hello fullname"; // for the field name fullname
-		} // DB has 2 data, so this will be called twice to find fullname in data
+		fullname({firstName, lastName}) {
+			// bring data from users DB that shaped in typeDefs and display
+			return `${firstName}, ${lastName}`;
+		}
 	}
 }
 
