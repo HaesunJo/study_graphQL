@@ -1,5 +1,19 @@
 import { ApolloServer, gql } from "apollo-server";
 
+// 03 fake DB
+const tweets = [
+	{ 
+		id: "1",
+		text: "hello",
+		
+	},
+	{ 
+		id: "2",
+		text: "hello again",
+
+	}
+]
+
 
 // 02. graphQL's schema definition language (SDL)
 // this will show this error message :
@@ -24,28 +38,50 @@ import { ApolloServer, gql } from "apollo-server";
 const typeDefs = gql`
 
 	type User {
-		id: ID
-		username: String
+		id: ID!
+		username: String!
+		firstName: String!
+		lastName: String!
 	}
 
 	type Tweet {
-		id: ID
-		text: String
+		id: ID!
+		text: String!
 		author: User
 	}
 
 	type Query {
 		allTweets: [Tweet!]!
 		singleTweet(id: ID!): Tweet
+		ping: String!
 	}
 
 	type Mutation {
-		postTweet(text: String, userId: ID): Tweet
-		deleteTweet(id: ID): Boolean
+		postTweet(text: String!, userId: ID!): Tweet!
+		deleteTweet(id: ID!): Boolean!
 	}
 `;
 
-const server = new ApolloServer({typeDefs})
+const resolvers = {
+	Query: {
+		allTweets() {
+			return tweets;
+		},
+		singleTweet(root, {id}){ // if it has argument in gql, put it in the second place. first one is always for root
+			// console.log(args);
+			return tweets.find((singleTweet) => singleTweet.id === id);
+		}
+		// singleTweet() {
+		// 	console.log("resolvers are called");
+		// 	return null;
+		// },
+		// ping() {
+		// 	return "pong";
+		// }
+	}
+}
+
+const server = new ApolloServer({typeDefs, resolvers})
 
 
 // 01. without typeDefs, this will show an error that 
