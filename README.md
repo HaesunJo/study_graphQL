@@ -272,25 +272,25 @@ $ npm run dev
 
 
 
-			"""
-			description here
-			"""
+		"""
+		description here
+		"""
 
 
 
-			```javascript
+```javascript
 
-			type User {
-					id: ID!
-					"""
-						is the sum of firstName and lastName as a string
-					"""
-					fullname: String!
-					firstName: String!
-					lastName: String!
-				}
+type User {
+	id: ID!
+	"""
+		is the sum of firstName and lastName as a string
+	"""
+	fullname: String!
+	firstName: String!
+	lastName: String!
+}
 
-			```
+```
 
 
 #### ❗❗ conflict in the windows OS
