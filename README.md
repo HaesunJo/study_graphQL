@@ -1,4 +1,4 @@
-# Practice GraphQL(query language) and node.js on the side
+# Practice GraphQL(query language) with node.js
 
 ## See the differences with REST
 
