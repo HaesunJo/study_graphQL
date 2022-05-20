@@ -268,7 +268,7 @@ $ npm run dev
 ## 📋 Documentation 📋
 
 
-- add """ description """ above what you want to decribe 
+- add """ description """ above that you want to decribe 
 
 ```javascript
 
