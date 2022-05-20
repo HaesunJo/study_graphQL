@@ -5,12 +5,12 @@ let tweets = [
 	{ 
 		id: "1",
 		text: "hello",
-		
+		userId: "2"
 	},
 	{ 
 		id: "2",
 		text: "hello again",
-
+		userId: "1"
 	}
 ]
 
@@ -31,6 +31,9 @@ const typeDefs = gql`
 
 	type User {
 		id: ID!
+		"""
+			is the sum of firstName and lastName as a string
+		"""
 		fullname: String!
 		firstName: String!
 		lastName: String!
@@ -51,6 +54,9 @@ const typeDefs = gql`
 
 	type Mutation {
 		postTweet(text: String!, userId: ID!): Tweet!
+		"""
+		Deletes a Tweet if found, else returns false
+		"""
 		deleteTweet(id: ID!): Boolean!
 	}
 `;
@@ -74,6 +80,7 @@ const resolvers = {
 			const newTweet ={
 				id: tweets.length + 1,
 				text,
+				userId
 			};
 			tweets.push(newTweet);
 			return newTweet;
@@ -89,6 +96,15 @@ const resolvers = {
 		fullname({firstName, lastName}) {
 			// bring data from users DB that shaped in typeDefs and display
 			return `${firstName}, ${lastName}`;
+		}
+	},
+	Tweet: {
+		author({userId}) {
+			// works like 'JOIN' in sql
+			// return users.find((user) => user.id === userId)
+			uId = users.find((user) => user.id === userId)
+			if(!uId) return null;
+			return `user id is ${uId}`
 		}
 	}
 }

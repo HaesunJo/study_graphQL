@@ -265,7 +265,32 @@ $ npm run dev
 
 ------
 
+## 📋 Documentation 📋
 
+
+- add """ description """ above what you want to decribe 
+
+
+
+			"""
+			description here
+			"""
+
+
+
+			```javascript
+
+			type User {
+					id: ID!
+					"""
+						is the sum of firstName and lastName as a string
+					"""
+					fullname: String!
+					firstName: String!
+					lastName: String!
+				}
+
+			```
 
 
 #### ❗❗ conflict in the windows OS
